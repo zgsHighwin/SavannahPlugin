@@ -1,0 +1,58 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+apply plugin: "com.gradle.plugin-publish"
+repositories {
+    mavenCentral()
+    google()
+    jcenter()
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'com.android.tools.build:gradle:4.0.0'
+}
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.gradle.publish:plugin-publish-plugin:0.12.0"
+    }
+}
+
+
+version = "1.0.1"
+group = "com.savannah.plugin"
+
+apply plugin: "com.gradle.plugin-publish"
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.groupId = 'com.savannah.plugin'
+            pom.artifactId = 'methodCount'
+            pom.version = version
+            repository(url: uri('./repo'))
+        }
+    }
+}
+
+
+
+pluginBundle {
+    website = 'https://github.com/zgsHighwin/SavannahPlugin'
+    vcsUrl = 'https://github.com/zgsHighwin/SavannahPlugin'
+    description = 'method time count'
+    tags = ['transform', 'method time count']
+
+    plugins {
+        greetingsPlugin {
+            // id is captured from java-gradle-plugin configuration
+            id='com.savannah.plugin'
+            displayName = 'savannah plugin'
+        }
+    }
+}
+

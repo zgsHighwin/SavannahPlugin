@@ -1,0 +1,3 @@
+include ':SavannahPlugin'
+include ':app'
+rootProject.name = "PluginTestApplication"
